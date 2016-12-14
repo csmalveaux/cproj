@@ -10,7 +10,7 @@ RM              = rm -f
 CP              = cp
 CC			    = gcc
 
-APP			= test_maze.o
+APP			= test_maze.exe
 
 OUTPUTDIR   = obj
 OBJDIR      = $(OUTPUTDIR)
@@ -20,7 +20,7 @@ INTOFILES		= $(MAZE_FILES) $(MATHFUNC_FILES)
 MATHFUNC_FILES = $(addprefix $(OBJDIR)/, complex.o dsp.o matrix.o array.o singValD.o matrixDecomp.o sort.o search.o binarytree.o)
 MATHFUNC_PATH  = $../../mathfunc
 
-MAZE_FILES = $(addprefix $(OBJDIR)/, maze.o mazeDisp.o mazeGen.o mouse.o mazeSolv.o main.o)
+MAZE_FILES = $(addprefix $(OBJDIR)/, maze.o mazeDisp.o mazeGen.o mouse.o mazeSolv.o readMaze.o writeMaze.o main.o)
 MAZE_PATH  = ./
 
 LDFLAGS = -I$(MATHFUNC_PATH)

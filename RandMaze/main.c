@@ -84,4 +84,17 @@ int main(int argc, char *argv[] )  {
 
   free(umouse.map);
 
+  clearMaze(size, width);
+
+  char filename[20];
+  writeMazetest(map, size, width, filename);
+
+  unsigned short * map2;
+
+  int size2, width2;
+
+  //readMaze(map2, &size2, &width2, filename);
+  //refreshMaze(map2, size, width);
+
+
 }
