@@ -6,47 +6,75 @@
 #include "map.h"
 #include "mouse.h"
 #include "solver.h"
+#include "readwrite.h"
 
 int main(int argc, char *argv[] )  {
-	int i, size, height, width, animate, type;
+	int i, size, height, width, animate, type, solve, save;
 
 	if (argc == 2) {
        size = atoi(argv[1]);
        height = size;
        width =  size;
        type = 0;
-    }
-    else if (argc == 3) {
-       height = atoi(argv[1]);
-       width = atoi(argv[2]);
        animate = 0;
-       type = 0;
+       solve = 0;
+       save = 0;
     }
-    else if (argc == 4) {
-       height = atoi(argv[1]);
-       width = atoi(argv[2]);
-       type = atoi(argv[3]);
-       animate = 0;
-    }
-    else if (argc == 5) {
-       height = atoi(argv[1]);
-       width = atoi(argv[2]);
-       type = atoi(argv[3]);
-       animate = atoi(argv[4]);
-       sleep_time /= (height*width);
-
-    }
-    else if (argc >= 6) { 
-       height = atoi(argv[1]);
-       width = atoi(argv[2]);
-       type = atoi(argv[3]);
-       animate = atoi(argv[4]);
-       sleep_time = atoi(argv[5]);
-    }
+  else if (argc == 3) {
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    animate = 0;
+    type = 0;
+    solve = 0;
+    save = 0;
+  }
+  else if (argc == 4) {
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    type = atoi(argv[3]);
+    animate = 0;
+    solve = 0;
+    save = 0;
+  }
+  else if (argc == 5) {
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    type = atoi(argv[3]);
+    animate = atoi(argv[4]);
+    sleep_time /= (height*width);
+    solve = 0;
+    save = 0;
+  }
+  else if (argc >= 6) { 
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    type = atoi(argv[3]);
+    animate = atoi(argv[4]);
+    sleep_time = atoi(argv[5]);
+    solve = 0;
+    save = 0;
+  }
+  else if (argc >= 7) { 
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    type = atoi(argv[3]);
+    animate = atoi(argv[4]);
+    sleep_time = atoi(argv[5]);
+    save = atoi(argv[6]);
+    solve = 0;
+  }
+  else if (argc >= 8) { 
+    height = atoi(argv[1]);
+    width = atoi(argv[2]);
+    type = atoi(argv[3]);
+    animate = atoi(argv[4]);
+    sleep_time = atoi(argv[5]);
+    save = atoi(argv[6]);
+    solve = atoi(argv[7]);
+  }
     
-    size = height*width;
-
-	unsigned short map[size];
+  size = height*width;
+  unsigned short map[size];
   getCorners(size, width);
 
 	switch (type){
@@ -71,30 +99,29 @@ int main(int argc, char *argv[] )  {
 	}
 
   clearCursors();
-  
-  struct mouse umouse;
 
-  intialize_mouse(&umouse, 0, (height/2 - 1) * width + width/2 - 1);
-  umouse.map = calloc(size, sizeof(unsigned short));
-  setPerimeter(umouse.map, size, width);
+  if(solve){
+    struct mouse umouse;
+    intialize_mouse(&umouse, 0, (height/2 - 1) * width + width/2 - 1);
+    umouse.map = calloc(size, sizeof(unsigned short));
+    setPerimeter(umouse.map, size, width);
 
-  refreshMaze(umouse.map, size, width);
-  sleep_time *= 10;
-  solve(map, size, width, 1, &umouse, 1, animate);
+    refreshMaze(umouse.map, size, width);
+    sleep_time *= 10;
+    solve(map, size, width, 1, &umouse, 1, 1);
+  }
 
-  free(umouse.map);
-
-  clearMaze(size, width);
-
-  char filename[20];
-  writeMazetest(map, size, width, filename);
-
-  unsigned short * map2;
+  if(save){
+    writeMaze(map, size, width);
+  }
 
   int size2, width2;
 
-  //readMaze(map2, &size2, &width2, filename);
-  //refreshMaze(map2, size, width);
+  readMazeSize(&size2, &width2, "1161118_25147.mz");
 
+  unsigned short map2[size2];
+
+  readMaze(map2, size2, width2, "1161118_25147.mz");
+  displayMaze(map2, size2, width2);
 
 }

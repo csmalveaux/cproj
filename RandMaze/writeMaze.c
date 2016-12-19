@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 
+void writeMaze(unsigned short * map, int size, int width);
+void writeMazetest(unsigned short * map, int size, int width, char * filename);
+
 void writeMaze(unsigned short * map, int size, int width){
 	FILE *fp;
 	time_t timer;
@@ -13,7 +16,8 @@ void writeMaze(unsigned short * map, int size, int width){
 	
 	fp = fopen(filename, "w");
 	if(fp == NULL) exit(0);
-	fprintf(fp, "dim: %d %d\n", size/width, width);
+	fwrite(&size, sizeof(int), 1, fp);
+	fwrite(&width, sizeof(int), 1, fp);
 	fwrite(map, sizeof(unsigned short), size, fp);
 	fclose(fp);
 }
@@ -29,7 +33,8 @@ void writeMazetest(unsigned short * map, int size, int width, char * filename){
 	
 	fp = fopen(filename, "w");
 	if(fp == NULL) {printf("could not open file\n"); exit(0);}
-	fprintf(fp, "dim: %d %d\n", size/width, width);
+	fwrite(&size, sizeof(int), 1, fp);
+	fwrite(&width, sizeof(int), 1, fp);
 	fwrite(map, sizeof(unsigned short), size, fp);
 	fclose(fp);
 }

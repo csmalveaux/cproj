@@ -2,26 +2,34 @@
 #include <string.h>
 #include <stdlib.h>
 
-void readMaze(unsigned short * map, int * size, int * width, char * filename){
+void readMazeSize(int * size, int * width, char * filename);
+void readMaze(unsigned short * map, int size, int width, char * filename);
+
+void readMazeSize(int * size, int * width, char * filename){
+
 	FILE *fp;
-	int height, wid;
+	int sz;
+	fp = fopen(filename, "r");
+	if(fp == NULL) { printf("could not open file\n"); exit(0); }
+
+	fread(size, sizeof(int), 1, fp);
+	fread(width, sizeof(int), 1, fp);
+
+	fclose(fp);
+}
+
+void readMaze(unsigned short * map, int size, int width, char * filename){
+	FILE *fp;
+	int sz, wid;
 	fp = fopen(filename, "r");
 	if(fp == NULL) { printf("could not open file\n"); exit(0); }
 	
-	char buff[10];
-	fscanf(fp, "%s", buff);
-	if(strcmp(buff, "dim") == 0){
-		fscanf(fp, "%d", &height);
-		fscanf(fp, "%d", &wid);
-		int sz = wid * height;
+	fread(&sz, sizeof(int), 1, fp);
+	fread(&wid, sizeof(int), 1, fp);
 
-		* size = sz;
-		* width = wid;
-		
-		map = malloc(sizeof(unsigned short)*sz);
-		fread (map, sizeof(unsigned short), sz, fp);
-	}
-	else{printf("No dim tag\n"); exit(0);}
+	if(sz != size || wid != width){ printf("Wrong maze file"); exit(0); }
+	
+	fread (map, sizeof(unsigned short), sz, fp);
 	
 	fclose(fp);
 }

@@ -1,6 +1,8 @@
 
 ###################################################################
-#
+# Main Maze Test Executable 
+# Chloe Malveaux
+# Dec 2016
 ###################################################################
 
 
@@ -17,10 +19,10 @@ OBJDIR      = $(OUTPUTDIR)
 
 INTOFILES		= $(MAZE_FILES) $(MATHFUNC_FILES)
 
-MATHFUNC_FILES = $(addprefix $(OBJDIR)/, complex.o dsp.o matrix.o array.o singValD.o matrixDecomp.o sort.o search.o binarytree.o)
+MATHFUNC_FILES = $(addprefix $(OUTPUTDIR)/, complex.o dsp.o matrix.o array.o singValD.o matrixDecomp.o sort.o search.o binarytree.o)
 MATHFUNC_PATH  = $../../mathfunc
 
-MAZE_FILES = $(addprefix $(OBJDIR)/, maze.o mazeDisp.o mazeGen.o mouse.o mazeSolv.o readMaze.o writeMaze.o main.o)
+MAZE_FILES = $(addprefix $(OUTPUTDIR)/, maze.o mazeDisp.o mazeGen.o mouse.o mazeSolv.o readMaze.o writeMaze.o main.o)
 MAZE_PATH  = ./
 
 LDFLAGS = -I$(MATHFUNC_PATH)
@@ -31,7 +33,6 @@ vpath	%.c $(MAZE_PATH):$(MATHFUNC_PATH)
 vpath	%.h $(MAZE_PATH):$(MATHFUNC_PATH)
 
 ###################################################################
-
 # Make rules
 ###################################################################
 
