@@ -1,0 +1,14 @@
+{
+	"folders":
+	[
+		{
+			"path": "/Users/chloemalveaux/Desktop/cproj"
+		}
+	],
+    "settings":
+    {
+        "sublimegdb_workingdir": "${folder:${project_path:test_maze.exe}}",
+        // NOTE: You MUST provide --interpreter=mi for the plugin to work
+        "sublimegdb_commandline": "gdb --interpreter=mi /Users/chloemalveaux/Desktop/cproj/test_maze.exe"
+    }
+}

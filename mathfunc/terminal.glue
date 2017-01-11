@@ -1,0 +1,20 @@
+█ [ /Users/chloemalveaux/Desktop/cproj ] ls
+Menu
+RandMaze
+mathfunc
+microMouseMapping
+test_maze.o
+test_maze.sublime-workspace
+
+█ [ /Users/chloemalveaux/Desktop/cproj ] ./test_maze.o 5 5 1 1 1
+/bin/sh: ./test_maze.o: cannot execute binary file
+
+ █ [ /Users/chloemalveaux/Desktop/cproj ] make clean
+make: *** No rule to make target `clean'.  Stop.
+
+█ [ /Users/chloemalveaux/Desktop/cproj/mathfunc ] make clean
+make: *** No rule to make target `clean'.  Stop.
+
+█ [ /Users/chloemalveaux/Desktop/cproj ] make
+make: *** No targets specified and no makefile found.  Stop.
+
