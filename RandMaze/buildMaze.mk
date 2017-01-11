@@ -24,7 +24,7 @@ MAZE_PATH  = ./
 
 LDFLAGS = -lncurses
 
-CFLAGS = -fstack-protector-all
+#CFLAGS = -fstack-protector-all
 
 #LIBS = 
 
@@ -52,7 +52,7 @@ $(OUTPUTDIR) :
 	
 # Compiling
 $(OBJDIR)/%.o : %.c
-	$(CC) -c -g $(LDFLAGS) $(CFLAGS) $< -o pocs $@
+	$(CC) -c -g $(CFLAGS) $< -o $@
 
 # Cleaning
 .PHONY : clean ftp
